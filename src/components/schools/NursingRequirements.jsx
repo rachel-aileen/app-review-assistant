@@ -282,6 +282,38 @@ function NursingRequirements() {
             </div>
           </div>
         )}
+
+      {/* START BELOW THIS LINE */}
+      {/* Show admission status based on conditions */}
+      {allRequirementsMet && (
+        <div
+          style={{
+            marginTop: "30px",
+            padding: "15px",
+            backgroundColor: allRequirementsMet ? "#d4edda" : "#fff3cd",
+            border: `1px solid ${allRequirementsMet ? "#c3e6cb" : "#ffeeba"}`,
+            borderRadius: "4px",
+          }}
+        >
+          <div
+            style={{
+              fontSize: "16px",
+              marginBottom: "8px",
+              color: allRequirementsMet ? "#155724" : "#856404",
+            }}
+          >
+            <b>Admissions Decision:</b> {allRequirementsMet ? "Admit" : "Hold"}
+          </div>
+          <div
+            style={{
+              fontSize: "16px",
+              color: allRequirementsMet ? "#155724" : "#856404",
+            }}
+          >
+            <b>Next Bin:</b> {allRequirementsMet ? "Read 2" : "Hold"}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

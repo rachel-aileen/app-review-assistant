@@ -20,11 +20,11 @@ function App() {
     { value: "3.0-3.49", label: "3.0-3.49" },
     { value: "2.5-2.99", label: "2.5-2.99" },
     { value: "2.3-2.49", label: "2.3-2.49" },
-    { value: "below2.5", label: "Below 2.3" },
+    { value: "below2.3", label: "Below 2.3" },
   ];
 
-  const showRequirements =
-    selectedMajor === "optionNursing" && selectedGPA === "3.5-5.0";
+  // Check if GPA is 2.3 or below
+  const isLowGPA = selectedGPA === "below2.3";
 
   return (
     <div className="App">
@@ -42,7 +42,41 @@ function App() {
           onChange={(e) => setSelectedGPA(e.target.value)}
         />
 
-        {showRequirements && <NursingRequirements />}
+        {/* Show Nursing Requirements only if it's Nursing major with 3.5+ GPA */}
+        {selectedMajor === "optionNursing" && selectedGPA === "3.5-5.0" && (
+          <NursingRequirements />
+        )}
+
+        {/* Show Deny message if GPA is 2.3 or below */}
+        {isLowGPA && selectedMajor && (
+          <div
+            style={{
+              marginTop: "30px",
+              padding: "15px",
+              backgroundColor: "#f8d7da",
+              border: "1px solid #f5c6cb",
+              borderRadius: "4px",
+            }}
+          >
+            <div
+              style={{
+                fontSize: "16px",
+                marginBottom: "8px",
+                color: "#721c24",
+              }}
+            >
+              <b>Admissions Decision:</b> Deny
+            </div>
+            <div
+              style={{
+                fontSize: "16px",
+                color: "#721c24",
+              }}
+            >
+              <b>Next Bin:</b> Deny
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

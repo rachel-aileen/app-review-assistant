@@ -17,6 +17,21 @@ function NursingRequirements() {
     setSelectedChem(event.target.value);
   };
 
+  // Check if any requirement is "none"
+  const hasIncompleteRequirements =
+    selectedMath === "none" ||
+    selectedBio === "none" ||
+    selectedChem === "none";
+
+  // Check if all requirements are completed (selected and not "none")
+  const allRequirementsMet =
+    selectedMath &&
+    selectedMath !== "none" &&
+    selectedBio &&
+    selectedBio !== "none" &&
+    selectedChem &&
+    selectedChem !== "none";
+
   return (
     <div style={{ marginTop: "20px" }}>
       {/* ////////// MATH REQUIREMENT ////////// */}
@@ -235,6 +250,38 @@ function NursingRequirements() {
           </div>
         </div>
       </div>
+
+      {/* Show hold message if any requirement is "none" and at least one selection has been made */}
+      {hasIncompleteRequirements &&
+        (selectedMath || selectedBio || selectedChem) && (
+          <div
+            style={{
+              marginTop: "30px",
+              padding: "15px",
+              backgroundColor: "#fff3cd",
+              border: "1px solid #ffeeba",
+              borderRadius: "4px",
+            }}
+          >
+            <div
+              style={{
+                fontSize: "16px",
+                marginBottom: "8px",
+                color: "#856404",
+              }}
+            >
+              <b>Admissions Decision:</b> Hold
+            </div>
+            <div
+              style={{
+                fontSize: "16px",
+                color: "#856404",
+              }}
+            >
+              <b>Next Bin:</b> Hold
+            </div>
+          </div>
+        )}
     </div>
   );
 }
